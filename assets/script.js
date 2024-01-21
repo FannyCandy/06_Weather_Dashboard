@@ -27,19 +27,23 @@ $(document).ready(function () {
                     $(".currentCity").empty()
                     var currentDate = dayjs().format('dddd, MMMM D, YYYY')
                     console.log(currentDate)
-                    var weatherData = $('<div col-12>').append($(`<h2>
-                    ${weather.name} (${currentDate})
-                    $('<img class="icon">').attr('src', http://openweathermap.org/img/w/${weather.weather[0].icon}.png)
-                    </h2>`))
-                    // .append($('<img class="icon">').attr('src', 'http://openweathermap.org/img/w/' + weather.weather[0].icon + '.png'));
-                    // var icon = $('<img class="icon">').attr('src', 'http://openweathermap.org/img/w/' + response.weather[0].icon + '.png');  
-
+                    var weatherData = $('<div col-12>').append(
+                        $('<h3>').text(`${weather.name} (${currentDate})`),
+                        $('<img class="icon">').attr('src', `http://openweathermap.org/img/w/${weather.weather[0].icon}.png`),
+                        $('<h5>').text(`Temp: ${weather.main.temp} °F`),
+                        $('<h5>').text(`Wind: ${weather.wind.speed} MPH`),
+                        $('<h5>').text(`Humidity: ${weather.main.humidity} %`));
 
                     $(".currentCity").append(weatherData);
-                })
+                });
+            } else {
+                alert('please enter a valid city name')
             }
-
-        })
+        });
     }
+
+
+
+    
 
 });
