@@ -2,6 +2,8 @@ $(document).ready(function () {
 
     var APIKey = '83c01c42f7d290ab30e82ec134075cdc';
     var city = '';
+    var savedData = localStorage.getItem('recent-searched');
+    console.log('local stored', savedData)
 
     $('.searchBtn').on('click', function (event) {
         event.preventDefault();
@@ -14,7 +16,11 @@ $(document).ready(function () {
         console.log(city);
         fetchWeather(city);
         saveToLocal(city);
+        recentSearched(city);
     });
+
+    recentSearched();
+    displayRecentSearched();
 
     function fetchWeather(city) {
         var queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
@@ -52,11 +58,14 @@ $(document).ready(function () {
                     console.log(forecast)
 
                     $(".5-dayForecast").empty()
+                    $(".5-dayForecast").prepend($('<h3>').text('5-Day Forecast:'));
                     var list = forecast.list;
+
                     for (i = 0; i < list.length; i++) {
                         var time = list[i].dt_txt.split(' ')[1];
                         var date = list[i].dt_txt.split(' ')[0];
-                        console.log('date', date, 'time', time)
+                        // console.log('date', date, 'time', time);
+
                         if (time === '12:00:00') {
                             var weatherData = $('<div class="card">').append(
                                 // $('<div class="card-body">'),
@@ -77,9 +86,9 @@ $(document).ready(function () {
     }
 
     function saveToLocal(city) {
-        var savedData = localStorage.getItem('recent-searched');
+        // var savedData = localStorage.getItem('recent-searched');
         if (!savedData) {
-            savedData = city;
+            savedData = [city];
             localStorage.setItem('recent-searched', savedData);
         } else if (savedData.indexOf(city) === -1) {
             savedData = savedData + ', ' + city;
@@ -89,14 +98,21 @@ $(document).ready(function () {
         }
     }
 
+    // function checkLocal(city) {
+        
+    //     if (savedData) {
+    //         savedList = savedData.trim().split(',');
+    //         console.log('saved city', savedList);
+    //     }
+    // }
+
     function recentSearched() {
-        var savedData = localStorage.getItem('recent-searched');
         var savedList = [];
         if (savedData) {
-            // savedData.trim();
             savedList = savedData.trim().split(',');
             console.log('saved city', savedList);
 
+            $(".recentSearch").empty();
             for (i = 0; i < savedList.length; i++) {
                 var cityBtn = $('<button type="submit" class="btn btn-secondary cityBtn">')
                     .text(savedList[i]);
@@ -111,9 +127,15 @@ $(document).ready(function () {
         }
     }
 
-    function init() {
-        recentSearched();
+    function displayRecentSearched() {
+        var savedList = [];
+        if (!savedData) {
+            $(".currentCity").append($('<h3>').text('Welcome to weather dashboard!'))
+        } else {
+            savedList = savedData.trim().split(',');
+            var displayCity = savedList[savedList.length - 1]
+            fetchWeather(displayCity);
+        }
     }
 
-    init();
 });
