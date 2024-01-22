@@ -13,7 +13,7 @@ $(document).ready(function () {
 
         console.log(city);
         fetchWeather(city);
-        // saveToLocal(city);
+        saveToLocal(city);
     });
 
     function fetchWeather(city) {
@@ -76,6 +76,44 @@ $(document).ready(function () {
         });
     }
 
+    function saveToLocal(city) {
+        var savedData = localStorage.getItem('recent-searched');
+        if (!savedData) {
+            savedData = city;
+            localStorage.setItem('recent-searched', savedData);
+        } else if (savedData.indexOf(city) === -1) {
+            savedData = savedData + ', ' + city;
+            localStorage.setItem('recent-searched', savedData);
+        } else {
+            console.log('saved', savedData)
+        }
+    }
 
+    function recentSearched() {
+        var savedData = localStorage.getItem('recent-searched');
+        var savedList = [];
+        if (savedData) {
+            // savedData.trim();
+            savedList = savedData.trim().split(',');
+            console.log('saved city', savedList);
 
+            for (i = 0; i < savedList.length; i++) {
+                var cityBtn = $('<button type="submit" class="btn btn-secondary cityBtn">')
+                    .text(savedList[i]);
+                $(".recentSearch").append(cityBtn);
+                $('.cityBtn').on('click', function () {
+                    var SavedCity = $(this).text();
+                    fetchWeather(SavedCity);
+                })
+            }
+        } else {
+            console.log('no saved data')
+        }
+    }
+
+    function init() {
+        recentSearched();
+    }
+
+    init();
 });

@@ -4,8 +4,27 @@ body {
 }
 
 header {
-    background-color: darkblue;
+    background-color: rgb(7, 64, 130);
     color: aliceblue;
+}
+
+.btn-primary {
+    width: 100%;
+    background-color: rgb(7, 64, 130);
+    color: aliceblue;
+}
+
+.btn-secondary{
+    width: 100%;
+    margin-bottom: 1em;
+    color: aliceblue;
+
+}
+
+.currentCity {
+    border: solid 2px rgb(7, 64, 130);
+    padding: 1em;
+    margin-bottom: 1em;
 }
 
 .card {
