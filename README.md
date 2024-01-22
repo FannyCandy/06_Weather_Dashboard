@@ -7,10 +7,10 @@ A weather dashboard that will run in the browser and feature dynamically updated
 ![](./Screenshot.png)
 
 ## GitHub Repo
-
+https://github.com/FannyCandy/06_Weather_Dashboard
 
 ## Deployed App
-
+https://fannycandy.github.io/06_Weather_Dashboard/
 
 ## Credit / Resources used
 NU BootCamp curriculum

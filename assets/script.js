@@ -65,7 +65,7 @@ $(document).ready(function () {
     }
 
     function fetchWeather(city) {
-        var queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
+        var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
         fetch(queryURL).then(function (response) {
             // console.log('response', response)
             if (response.ok) {
@@ -77,7 +77,7 @@ $(document).ready(function () {
                     console.log('date', currentDate)
                     var weatherData = $('<div col-12>').append(
                         $('<h3>').text(`${weather.name} (${currentDate})`),
-                        $('<img class="icon">').attr('src', `http://openweathermap.org/img/w/${weather.weather[0].icon}.png`),
+                        $('<img class="icon">').attr('src', `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`),
                         $('<h5>').text(`Temp: ${weather.main.temp} °F`),
                         $('<h5>').text(`Wind: ${weather.wind.speed} MPH`),
                         $('<h5>').text(`Humidity: ${weather.main.humidity} %`));
@@ -92,7 +92,7 @@ $(document).ready(function () {
     }
 
     function fiveDayForecast(city) {
-        var queryURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}`;
+        var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}`;
         fetch(queryURL).then(function (response) {
             // console.log('response', response)
             if (response.ok) {
@@ -112,7 +112,7 @@ $(document).ready(function () {
                             var weatherData = $('<div class="card">').append(
                                 // $('<div class="card-body">'),
                                 $('<h5 class="card-title">').text(`${date}`),
-                                $('<img class="icon">').attr('src', `http://openweathermap.org/img/w/${list[i].weather[0].icon}.png`),
+                                $('<img class="icon">').attr('src', `https://openweathermap.org/img/w/${list[i].weather[0].icon}.png`),
                                 $('<p class="card-text">').text(`Temp: ${list[i].main.temp} °F`),
                                 $('<p class="card-text">').text(`Wind: ${list[i].wind.speed} MPH`),
                                 $('<p class="card-text">').text(`Humidity: ${list[i].main.humidity} %`));
