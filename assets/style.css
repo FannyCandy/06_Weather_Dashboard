@@ -1,9 +1,18 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-  }
+}
 
-  header {
+header {
     background-color: darkblue;
     color: aliceblue;
-  }
+}
+
+.card {
+    min-width: 18%;
+    display: inline-block;
+    margin: .5em;
+    padding: 1em;
+    background-color: skyblue;
+    font-weight:bold;
+}
